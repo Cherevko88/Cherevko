@@ -80,58 +80,46 @@ class Triangle:
     __first_point = None
     __second_point = None
     __third_point = None
-    # __line1 = None
-    # __line2 = None
-    # __line3 = None
+    __area = None
 
     def check_points(self, first_point, second_point, third_point):
         if first_point.x == second_point.x == third_point.x or first_point.y == second_point.y == third_point.y:
             raise TypeError
         return first_point, second_point, third_point
 
-
     def __init__(self, first_point, second_point, third_point):
         if isinstance(first_point, Point) and isinstance(second_point, Point) and isinstance(third_point, Point):
-                # and \
-                # isinstance(line1, Line) and isinstance(line2, Line) and isinstance(line3, Line):
-            self.__first_point, self.__second_point,self.__third_point = self.check_points(first_point,second_point,third_point)
-            # self.__line1 = line1
-            # self.__line2 = line2
-            # self.__line3 = line3
+            self.first_point, self.second_point,self.third_point = self.check_points(first_point,second_point,third_point)
         else:
             raise TypeError
 
     def line_sqrt(self, __first_point, __second_point):
-        side_triangle = ((self.__second_point.x - self.__first_point.x)**2 + (self.__second_point.y - self.__first_point.y)**2)** 0.5
+        side_triangle = ((self.second_point.x - self.first_point.x)**2 + (self.second_point.y - self.first_point.y)**2)** 0.5
         return side_triangle
 
-
     def area(self):
+        ab = self.line_sqrt(self.__first_point, self.__second_point)
+        bc = self.line_sqrt(self.__second_point, self.__third_point)
+        ac = self.line_sqrt(self.__first_point, self.__third_point)
 
-        AB = self.line_sqrt(self.__first_point, self.__second_point)
-        BC = self.line_sqrt(self.__second_point, self.__third_point)
-        AC = self.line_sqrt(self.__first_point, self.__third_point)
-
-        if AB == BC == AC:
-            self.area = (sqrt(3) * AB ** 2) / 4
-        elif AB != BC != AC:
-            p = (AB + BC + AC) / 2
-            self.area = sqrt(p * (p - AB) * (p - BC) * (p - AC))
+        if ab == bc == ac:
+            self.area = (sqrt(3) * ab ** 2) / 4
+        elif ab != bc != ac:
+            p = (ab + bc + ac) / 2
+            self.area = sqrt(p * (p - ab) * (p - bc) * (p - ac))
         else:
-            for i in (AB, BC, AC):
-                for k in (BC, AC, AB):
+            for i in (ab, bc, ac):
+                for k in (bc, ac, ab):
                     if i == k:
                         self.area = i * k * sin(30)
         return self.area
 
-
-
-    # def __str__(self):
-    #     return f"Это треугольник и точки координат: a - x:{self.__first_point.x} y:{self.__first_point.y}, "\
-    #                                               f"b - x:{self.__second_point.x} y:{self.__second_point.y}, "\
-    #                                               f"c - x:{self.__third_point.x} y:{self.__third_point.y}"
+    def __str__(self):
+        return f"Это треугольник имеет площадь {self.area()} " \
+               f"и точки координат: a - x:{self.__first_point.x} y:{self.__first_point.y}, "\
+               f"b - x:{self.__second_point.x} y:{self.__second_point.y}, "\
+               f"c - x:{self.__third_point.x} y:{self.__third_point.y}"
 
 
 trian = Triangle(point1, point2, point3)
 print(trian.area())
-# print(tr_ar)
