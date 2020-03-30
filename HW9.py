@@ -102,11 +102,15 @@ class Circle:
     __r = None
 
     def __init__(self, k, r):
-        self.__r = r
-        if isinstance(k, Point):
+        if isinstance(k, Point) and isinstance(r, (float, int)):
+            self.__r = r
             self.__k = k
         else:
             raise TypeError
 
     def __str__(self):
-        return f"Это треугольник и точки координат:
+        return f"Это круг с радиусом равный {self.__r} и точка k имеет координат x:{self.__k.x} : y:{self.__k.y}"
+
+
+rad_cir = Circle(point1, 3)
+print(rad_cir)
