@@ -97,14 +97,16 @@ class Triangle:
         else:
             raise TypeError
 
-    def line_sqrt(self):
-        return ((self.__second_point.x - self.__first_point.x)**2 + self.__second_point.y - self.__first_point.y)** 0.5
+    def line_sqrt(self, __first_point, __second_point):
+        side_triangle = ((self.__second_point.x - self.__first_point.x)**2 + self.__second_point.y - self.__first_point.y)** 0.5
+        return side_triangle
 
 
     def trin_true(self):
-        side_AB = self.line_sqrt(self._point_A, self._point_B)
-        side_BC = self.line_sqrt(self._point_B, self._point_C)
-        side_AC = self._side_len(self._point_A, self._point_C)
+
+        if self.__line1 == self.line_sqrt(self.__first_point, self.__second_point) and \
+           self.__line2 == self.line_sqrt(self.__second_point, self.__third_point) and \
+           self.__line3 == self.line_sqrt(self.__first_point, self.__third_point):
 
             return f"Это треугольник и точки координат: a - x:{self.__first_point.x} y:{self.__first_point.y}, "\
                                                   f"b - x:{self.__second_point.x} y:{self.__second_point.y}, "\
@@ -137,10 +139,5 @@ class Triangle:
 
 trian = Triangle(point1, point2, point3, line1, line2, line3)
 # tr_ar = Triangle.area
-print(trian.trin_true())
+print(trian.trin_true)
 # print(tr_ar)
-
-
-
-
-
