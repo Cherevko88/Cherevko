@@ -98,7 +98,7 @@ class Triangle:
         return first_point, second_point, third_point
 
 
-    def triang_sqrt(self):
+    def triang_sqrt(self,first_point,second_point):
         line_tringle =((self.__second_point.x - self.__first_point.x)**2 +
                      (self.__second_point.y - self.__first_point.y)**2)** 0.5
         return line_tringle
@@ -108,9 +108,11 @@ class Triangle:
         bc = self.triang_sqrt(self.__second_point, self.__third_point)
         ac = self.triang_sqrt(self.__first_point, self.__third_point)
 
-        if ab != bc != ac:
+        if ab == bc == ac:
+            self._area = (sqrt(3) * ab ** 2) / 4
+        elif ab != bc != ac:
             p = (ab + bc + ac) / 2
-            self.area = sqrt(p * (p - ab) * (p - bc) * (p - ac))
+            self._area = sqrt(p * (p - ab) * (p - bc) * (p - ac))
         return self.area
 
     def __str__(self):
@@ -121,5 +123,5 @@ class Triangle:
 
 
 trian = Triangle(point1, point2, point3)
-# print(trian.area())
+print(trian.area())
 print(trian)
