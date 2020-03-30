@@ -1,5 +1,3 @@
-# from abc import ABC, abstractmethod
-from math import sqrt
 
 class Point:
     __x = 0
@@ -78,14 +76,14 @@ class Triangle:
     __first_point = None
     __second_point = None
     __third_point = None
-    __p = 0
 
-    def __init__(self, a, b, c):
+
+    def __init__(self, a, b, c, ):
         if isinstance(a, Point) and isinstance(b, Point) and isinstance(c, Point):
             self.__first_point = a
             self.__second_point = b
             self.__third_point = c
-        else:  
+        else:
             raise TypeError
 
     def __str__(self):
@@ -93,13 +91,5 @@ class Triangle:
                                                   f"b - x:{self.__second_point.x} y:{self.__second_point.y}, "\
                                                   f"c - x:{self.__third_point.x} y:{self.__third_point.y}"
 
-    def area_trin(self, p):
-
-        self.p = p
-        p = (line1 + line2 + line3)/ 2
-        return sqrt(p * (p - line1) * (p - line2) * (p - line3))
-
 trian = Triangle(point1, point2, point3)
 print(trian)
-area_tr = Triangle.area_trin(line1, line2, line3)
-print(area_tr)
