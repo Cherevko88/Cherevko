@@ -85,7 +85,8 @@ class Triangle:
             self.__first_point = a
             self.__second_point = b
             self.__third_point = c
-        raise TypeError
+        else:  
+            raise TypeError
 
     def __str__(self):
         return f"Это треугольник и точки координат: a - x:{self.__first_point.x} y:{self.__first_point.y}, "\
