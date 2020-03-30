@@ -1,3 +1,5 @@
+# from abc import ABC, abstractmethod
+from math import sqrt
 
 class Point:
     __x = 0
@@ -93,3 +95,18 @@ class Triangle:
 
 trian = Triangle(point1, point2, point3)
 print(trian)
+
+
+class Circle:
+    __k = None
+    __r = None
+
+    def __init__(self, k, r):
+        self.__r = r
+        if isinstance(k, Point):
+            self.__k = k
+        else:
+            raise TypeError
+
+    def __str__(self):
+        return f"Это треугольник и точки координат:
