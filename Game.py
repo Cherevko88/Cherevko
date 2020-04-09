@@ -14,13 +14,19 @@ class Unit(ABC):
         self.health = health
 
     @abstractmethod
-    def _attack(self,opponent):
+    def _attack(self, opponent):
         pass
 
     def attack(self, opponent):
         if not isinstance(opponent, Unit):
             raise Exception
+
+        if isinstance(opponent, Rogue):
+            r = random.randint(1, 2)
+            if r == 1:
+                opponent.health = opponent.health
         return self._attack(opponent)
+
 
     @property
     def health(self):
@@ -29,7 +35,7 @@ class Unit(ABC):
     @health.setter
     def health(self, val):
         if not isinstance(val, (int,float)):
-            raise  Exception
+            raise Exception
 
         self._health = val if val > 0 else 0
 
@@ -55,15 +61,35 @@ class Monk(Unit):
 class Rogue(Unit):
 
     def _attack(self, opponent):
-        r = random.randint(1, 2)
-        if r == 1:
-            self.health = self.health
-        else:
-            dmg = opponent._strength
-            self.health -= dmg
+
+        dmg = self._strength
+        opponent.health -= dmg
 
 
 k1 = Knight(name="Artur", strength=100, health=100)
 v1 = Vampire(name="Drac", strength=10, health=1000)
 r1 = Rogue(name="Krok", strength=50, health=1000)
 print(r1.health)
+
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+k1.attack(r1)
+print(r1.health)
+
+
