@@ -20,13 +20,17 @@ class Unit(ABC):
     def attack(self, opponent):
         if not isinstance(opponent, Unit):
             raise Exception
+        if opponent._health == 0:
+            raise Exception(f'Здоровье противника = "{opponent.health}"')
 
         if isinstance(opponent, Rogue):
-            r = random.randint(1, 2)
-            if r == 1:
+            r = random.randint(1, 10)
+            if r == 2:
                 opponent.health = opponent.health
-        return self._attack(opponent)
-
+            else:
+                return self._attack(opponent)
+        else:
+            return self._attack(opponent)
 
     @property
     def health(self):
@@ -49,47 +53,40 @@ class Vampire(Unit):
 class Knight(Unit):
 
     def _attack(self, opponent):
-        dmg = self._strength * 1.2
+
+        dmg = self._strength
         opponent.health -= dmg
 
 class Monk(Unit):
 
     def _attack(self, opponent):
-        dmg = self._strength + (self._health * 1.1)
+        dmg = opponent._strength
         opponent.health -= dmg
+        self._health = round(self._health * 1.1)
 
 class Rogue(Unit):
 
     def _attack(self, opponent):
-
         dmg = self._strength
         opponent.health -= dmg
 
-
-k1 = Knight(name="Artur", strength=100, health=100)
+k1 = Knight(name="Artur", strength=100, health=100000)
 v1 = Vampire(name="Drac", strength=10, health=1000)
-r1 = Rogue(name="Krok", strength=50, health=1000)
-print(r1.health)
+r1 = Rogue(name="Krok", strength=150, health=2000)
+m1 = Monk(name="Panda Kunfu", strength=90, health=1000)
 
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
-k1.attack(r1)
-print(r1.health)
+print(m1.health)
 
+m1.attack(k1)
+print(m1.health)
+m1.attack(k1)
+print(m1.health)
+m1.attack(k1)
+print(m1.health)
+m1.attack(k1)
+print(m1.health)
+m1.attack(k1)
+print(m1.health)
+m1.attack(k1)
+print(m1.health)
 
